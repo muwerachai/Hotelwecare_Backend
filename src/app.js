@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const notFound = require("./middlewares/notFound");
 const error = require("./middlewares/error");
 const authRoute = require("./route/authRoute");
+const authenticate = require("./middlewares/authenticate");
 
 const app = express();
 

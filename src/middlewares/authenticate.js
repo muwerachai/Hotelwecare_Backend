@@ -8,17 +8,11 @@ module.exports = async (req, res, next) => {
     if (!authorization || !authorization.startsWith("Bearer")) {
       throw new AppError("you are unauthenticated", 401);
     }
-
     const token = authorization.split(" ")[1];
     if (!token) {
       throw new AppError("unauthenticated", 401);
     }
-
-    const payload = jwt.verify(
-      token,
-      process.env.JET_SECRET_KEY || "private_key"
-    );
-
+    const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await User.findOne({
       where: { id: payload.id },
       attributes: { exclude: "password" }
